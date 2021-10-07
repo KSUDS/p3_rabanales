@@ -32,7 +32,7 @@ This data cannot be shared in your repository based on our [use agreement with S
 1. Complete the data joing and munging in R and Python.
 2. Complete the visualizations in R and Python.
 
-- [ ] Create an account with [SafeGraph](https://www.safegraph.com/academics)
+- [x] Create an account with [SafeGraph](https://www.safegraph.com/academics)
 - [ ] Create a data investigation narrative or question that will drive your project.
 - [ ] Tell a story through time-series charts for your narrative.
 - [ ] Tell a story through spatial maps for your narrative.
