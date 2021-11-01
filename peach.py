@@ -1,4 +1,9 @@
 #%%
+
+#arrow to the construct
+
+#parquch 
+#feather allows us to add special feature that parquch doesnt
 import pandas as pd
 import altair as alt
 import numpy as np
