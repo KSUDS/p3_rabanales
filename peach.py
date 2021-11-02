@@ -16,6 +16,10 @@ import geopandas as gpd
 #gdal installation
 #%%
 #import sys
+#!{sys.executable} -m pip install pyarrow
+#arrow install
+#%%
+#import sys
 #!{sys.executable} -m pip install geopandas
 
 
