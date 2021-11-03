@@ -216,8 +216,8 @@ usa_cities <- USAboundaries::us_cities() %>%
 sfarrow::st_write_feather(usa, "data/usa.feather")
 sfarrow::st_write_parquet(usa, "data/usa.parquet")
 
-sfarrow::st_write_feather(usa_counties, "data/usa_counties.feather")
-sfarrow::st_write_parquet(usa_counties, "data/usa_counties.parquet")
+sfarrow::st_write_feather(usa_counties, "usa_counties.feather")
+sfarrow::st_write_parquet(usa_counties, "usa_counties.parquet")
 
 sfarrow::st_write_feather(usa_cities, "data/usa_cities.feather")
 sfarrow::st_write_parquet(usa_cities, "data/usa_cities.parquet")
