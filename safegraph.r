@@ -3,6 +3,7 @@ install.packages("jsonlite")
 library(jsonlite)
 library(ggplot2)
 library(dbplyr)
+library(sf)
 
 #2019
 year19 <- read.csv("/Users/ashleyrabanales/Projects_ST/p3_AshLee/data/201907_formatted_county_data.csv")
@@ -188,6 +189,11 @@ ggplot()+
 #seperate and combine those near to cobb county. 
 
 
+#exporting the data into python
+remotes::install_github("ropensci/USAboundaries")
+remotes::install_github("ropensci/USAboundariesData")
+install.packages("sfarrow")
+
 #exporting out the data 
 #install.packages("sfarrow")
 library(USAboundaries)
@@ -195,6 +201,8 @@ library(sfarrow)
 library(tidyverse)
 library(sf)
 
+usa <- USAboundaries::us_boundaries() %>%
+    st_transform(4326)
 
 usa_counties <- USAboundaries::us_counties() %>%
     select(-state_name) %>%
@@ -203,15 +211,16 @@ usa_counties <- USAboundaries::us_counties() %>%
 usa_cities <- USAboundaries::us_cities() %>%
     st_transform(4326)
 
-usa <- USAboundaries::us_boundaries() %>%
-select(-state_name) %>%
-  st_transform(4326)
 
-usa_cities <- USAboundaries:: us_cities() %>%
-  st_transform(4326)
 
-sfarrow::st_write_feather(usa_counties, ""
-  
+sfarrow::st_write_feather(usa, "data/usa.feather")
+sfarrow::st_write_parquet(usa, "data/usa.parquet")
+
+sfarrow::st_write_feather(usa_counties, "data/usa_counties.feather")
+sfarrow::st_write_parquet(usa_counties, "data/usa_counties.parquet")
+
+sfarrow::st_write_feather(usa_cities, "data/usa_cities.feather")
+sfarrow::st_write_parquet(usa_cities, "data/usa_cities.parquet")
 
 #Apache Arrow? open source, farme work of datawork from other people. Two packages parka and feathers
 #geopandas can read it in, quicker, faster, and less space.
