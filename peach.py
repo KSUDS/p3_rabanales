@@ -167,19 +167,16 @@ calw = (cal
         gp_distance = lambda x: x.gp_center.distance(point),
         gp_buffer = lambda x: x.geometry.to_crs(epsg = 3310).buffer(24140.2)      
 ))
-#%%
-#spatial data
+# %%
+calw.gp_center.plot()
 calw.gp_buffer.plot()
-calw.gp_center.plot(color= "black")
-
 # %%
 base = calw.plot(color="white", edgecolor="darkgrey")
 dat_cal.plot(ax=base, color="red", markersize=5)
 # %%
-# Counting Chipotle stores by county
-#To leverage the spatial join functions of GeoPandas we need to make sure that we have rtree. We can leverage gpd.sjoin()
-#  for our task.
+# we want to plot filled counties by count.
 # Now count stores by county
+#%%
 dat_join_s1 = gpd.sjoin(dat_cal, calw)
 
 dat_join_merge = (dat_join_s1
@@ -193,11 +190,33 @@ calw_join = (calw
 # %%
 base = calw_join.plot(
     edgecolor="darkgrey",
-    column = "counts")
-dat_cal.plot(ax=base, color="red", markersize=4)
+    column = "counts", legend=True)
+dat_cal.plot(ax=base, color="red", markersize=2)
+
+
 # %%
 base_inter = calw_join.explore(
-        column 'counts',
-        style_kwds = {"fill0pacity":1
-            "color":darkgrey})
+    column = 'counts',
+    style_kwds = { 
+        "color":"darkgrey",
+        "weight":.4}
+)
+
+base_inter.save("plot.html")
+# %%
+theplot = dat_cal.explore(
+    m=base_inter,
+    marker_kwds={"radius":2, "fill":True},
+    style_kwds={"fillOpacity":1})
+
+theplot.save("plot.html")
+# %%
+
+folium.TileLayer('Stamen Toner', control=True).add_to(base_inter)  # use folium to add alternative tiles
+folium.LayerControl().add_to(base_inter)  
+
+theplot
+# %%
+theplot.save("plot.html")
+
 # %%
