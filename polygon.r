@@ -92,7 +92,6 @@ calw <- cal %>%            #st_transform - changing the projections
         ) #89 intersects county that arent part to add to LA.
 
 
-
 ggplot(data = calw) +
     geom_sf(aes(fill = sf_intersects)) + 
     geom_sf(aes(geometry = sf_buffer), fill = "white") +
